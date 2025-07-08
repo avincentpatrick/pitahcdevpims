@@ -103,7 +103,7 @@
                                         <div class="col-md-3">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <a href="{{ route('list-issuances') }}" class="btn btn-light btn-lg btn-block btn-icon-label">
+                                                    <a href="{{ route('issuances.index') }}" class="btn btn-light btn-lg btn-block btn-icon-label">
                                                         <i class="fas fa-file text-primary"></i> Issuances
                                                     </a>
                                                 </div>

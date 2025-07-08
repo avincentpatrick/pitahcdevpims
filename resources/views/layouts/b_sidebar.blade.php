@@ -7,7 +7,7 @@
     <div class="sidebar os-host os-theme-light os-host-overflow os-host-overflow-y os-host-resize-disabled os-host-scrollbar-horizontal-hidden os-host-transition">
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column nav-compact nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
-                @include('layouts.menu')
+                @include('layouts.b_menu')
             </ul>
         </nav>
     </div>

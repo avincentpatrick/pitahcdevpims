@@ -1,0 +1,139 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Document;
+use App\Models\DocumentRecipient;
+use DataTables;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
+class IssuanceController extends Controller
+{
+    public function index()
+    {
+        return view('issuances.index');
+    }
+
+    public function getIssuances(Request $request)
+    {
+        if ($request->ajax()) {
+            $query = Document::query()->orderBy('created_at', 'desc');
+
+            // Category filter
+            if ($request->filled('category')) {
+                $query->where('document_type_id', $request->input('category'));
+            }
+
+            // Custom search
+            if ($request->filled('custom_search')) {
+                $searchValue = $request->input('custom_search');
+                $query->where('document_title', 'like', '%' . $searchValue . '%');
+            }
+
+            // Issuance no search
+            if ($request->filled('issuance_no')) {
+                $issuanceNo = $request->input('issuance_no');
+                $query->where('document_reference_code', 'like', '%' . $issuanceNo . '%');
+            }
+
+            // Date range filter
+            if ($request->filled('start_date')) {
+                $query->whereDate('document_date', '>=', $request->input('start_date'));
+            }
+            if ($request->filled('end_date')) {
+                $query->whereDate('document_date', '<=', $request->input('end_date'));
+            }
+
+            return Datatables::of($query)
+                ->addColumn('subject', function($row){
+                    $issuanceType = '';
+                    switch ($row->document_type_id) {
+                        case 1:
+                            $issuanceType = 'PITAHC Order';
+                            break;
+                        case 2:
+                            $issuanceType = 'PITAHC Personnel Order';
+                            break;
+                        case 3:
+                            $issuanceType = 'PITAHC Memorandum';
+                            break;
+                        case 4:
+                            $issuanceType = 'PITAHC Memorandum Circular';
+                            break;
+                    }
+
+                    $subject = '<a href="' . asset('storage/' . $row->file_path) . '" target="_blank">' . $row->document_title . '</a>';
+                    $subject .= '<br><small><em>Administrative Issuance Type: ' . $issuanceType . '</em></small>';
+                    $subject .= '<br><small><em>Date Posted: ' . $row->created_at->format('Y-m-d') . '</em></small>';
+                    return $subject;
+                })
+                ->editColumn('document_reference_code', function($row){
+                    $issuanceType = '';
+                    switch ($row->document_type_id) {
+                        case 1:
+                            $issuanceType = 'PITAHC Order';
+                            break;
+                        case 2:
+                            $issuanceType = 'PITAHC Personnel Order';
+                            break;
+                        case 3:
+                            $issuanceType = 'PITAHC Memorandum';
+                            break;
+                        case 4:
+                            $issuanceType = 'PITAHC Memorandum Circular';
+                            break;
+                    }
+                    return $issuanceType . ' ' . $row->document_reference_code;
+                })
+                ->addColumn('document_date', function($row){
+                    return $row->document_date ? \Carbon\Carbon::parse($row->document_date)->format('Y-m-d') : 'N/A';
+                })
+                ->addColumn('action', function($row){
+                    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-info btn-sm"><i class="fas fa-edit"></i></a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['subject', 'action'])
+                ->make(true);
+        }
+    }
+
+    public function uploadDocument(Request $request)
+    {
+        $request->validate([
+            'document_type_id' => 'required|integer',
+            'document_title' => 'required|string|max:255',
+            'document_reference_code' => 'required|string|max:255',
+            'document_date' => 'required|date',
+            'file' => 'required|file|mimes:pdf',
+            'recipients' => 'nullable|string',
+        ]);
+
+        $filePath = $request->file('file')->store('issuances', 'public');
+
+        $document = new Document();
+        $document->document_type_id = $request->input('document_type_id');
+        $document->document_title = $request->input('document_title');
+        $document->document_reference_code = $request->input('document_reference_code');
+        $document->document_date = $request->input('document_date');
+        $document->file_path = $filePath;
+        $document->is_archived = 0;
+        $document->created_by = Auth::id();
+        $document->save();
+
+        if ($request->filled('recipients')) {
+            $emails = explode(',', $request->input('recipients'));
+            foreach ($emails as $email) {
+                $recipient = new DocumentRecipient();
+                $recipient->document_id = $document->id;
+                $recipient->email_address = trim($email);
+                $recipient->created_by = Auth::id();
+                $recipient->save();
+            }
+        }
+
+        return response()->json(['success' => true]);
+    }
+
+}

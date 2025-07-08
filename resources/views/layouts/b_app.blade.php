@@ -11,8 +11,7 @@
           crossorigin="anonymous"/>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- DataTables -->
-    <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+    <link href="{{ asset('css/datatables.css') }}" rel="stylesheet">
     <!-- Toastr -->
     <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css') }}">
     <!-- overlayScrollbars -->
@@ -26,8 +25,13 @@
     <link rel="stylesheet" href="{{ asset('/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css')}}">
+    <!-- JQuery -->
+    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+    <!-- Tesseract.js -->
+    <script src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js'></script>
     <!-- Alpine JS -->
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
     
     @yield('third_party_stylesheets')
 
@@ -41,19 +45,19 @@
   <div class="wrapper">
   @if( Auth::user() )
       <!-- Main Header -->
-      @include('layouts.navbar')
+      @include('layouts.b_navbar')
 
       <!-- Left side column. contains the logo and sidebar -->
-      @include('layouts.sidebar')
+      @include('layouts.b_sidebar')
 
       <!-- Content Wrapper. Contains page content -->
 
       <div class="content-wrapper">
-      {{ $slot }}
+          @yield('content')
       </div>
 
       <!-- Main Footer -->
-      @include('layouts.footer')
+      @include('layouts.b_footer')
   @else
     <div>
         {{ $slot }}
@@ -61,13 +65,7 @@
   @endif
   </div>
 
-<script src="{{ asset('js/app.js') }}" defer></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
-<script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
-<!-- DataTables -->
-<script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 <!-- Tostr -->
 <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
 <!-- overlayScrollbars -->
@@ -85,8 +83,9 @@
 <script src="{{ asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.min.js')}}"></script>
-<!-- AdminLTE App -->
-<script src="{{ asset('dist/js/adminlte.js')}}"></script>
+
+<!-- DataTables -->
+<script src="{{ asset('js/datatables.js') }}"></script>
 
 <!-- Popper -->
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -285,8 +284,8 @@
 	document.body.innerHTML = restorepage;
 }  
 </script>
-@stack('page_scripts')
 <livewire:scripts />
+@stack('page_scripts')
 </body>
 
 </html>

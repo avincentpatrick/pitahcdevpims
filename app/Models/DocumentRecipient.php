@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Document extends Model
+class DocumentRecipient extends Model
 {
     use HasFactory;
 
-    public function recipients()
+    public function document()
     {
-        return $this->hasMany(DocumentRecipient::class);
+        return $this->belongsTo(Document::class);
     }
 }

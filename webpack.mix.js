@@ -12,7 +12,11 @@ require('laravel-mix-artisan-serve');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css').serve({
+    .sass('resources/sass/app.scss', 'public/css')
+    .styles([
+        'node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css',
+        'node_modules/datatables.net-responsive-bs4/css/responsive.bootstrap4.css'
+    ], 'public/css/datatables.css').serve({
         host: '127.0.0.1',
         port: '8002',
       });

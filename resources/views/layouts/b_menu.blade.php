@@ -85,7 +85,7 @@
 	    @csrf
 	</form>
 </li>
-@elseif( request()->is('pages/issuance/*') )
+@elseif( request()->is('issuances*') )
 <li class="nav-item">
 	<a href="" class="nav-link">
 		<i class="nav-icon fas fa-chart-bar"></i>
@@ -93,7 +93,7 @@
 	</a>
 </li>
 <li class="nav-item">
-	<a href="{{ route('list-issuances') }}" class="nav-link {{ request()->is('pages/issuance/list-issuances') ? 'active' : '' }}">
+	<a href="{{ route('issuances.index') }}" class="nav-link {{ request()->is('issuances*') ? 'active' : '' }}">
 		<i class="nav-icon far fa-file-alt"></i>
 		<p>Issuances</p>
 	</a>

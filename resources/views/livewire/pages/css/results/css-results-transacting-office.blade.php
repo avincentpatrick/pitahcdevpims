@@ -530,7 +530,7 @@ window.onload = function() {
         const year = segments[segments.length - 2];
         const office = segments[segments.length - 1];
         const app_url = '{{ env('APP_URL') }}';
-        const set_url = 'http://192.168.1.9/dev_pims/api/respondents_sex_transacting_office/'+year+'/'+office;
+        const set_url = 'http://192.168.1.250/pitahcdevpims/api/respondents_sex_transacting_office/'+year+'/'+office;
         const response = await fetch(set_url);
         const datapoints = await response.json();
         return datapoints;
@@ -559,7 +559,7 @@ window.onload = function() {
     //     const year = $("#year").val();
     //     const report_type_id = $("#report_type_id").val();
     //     const app_url = '{{ env('APP_URL') }}';
-    //     const url = 'http://192.168.1.9/dev_pims/api/respondents_sex_transacting_office/'+year+'/'+report_type_id;
+    //     const url = 'http://192.168.1.250/pitahcdevpims/api/respondents_sex_transacting_office/'+year+'/'+report_type_id;
     //     const response = await fetch(url);
     //     const datapoints = await response.json();
     //     return datapoints;
@@ -651,7 +651,7 @@ const configA = {
         const year = segments[segments.length - 2];
         const office = segments[segments.length - 1];
         const app_url = '{{ env('APP_URL') }}';
-        const set_url = 'http://192.168.1.9/dev_pims/api/respondents_client_type_transacting_office/'+year+'/'+office;
+        const set_url = 'http://192.168.1.250/pitahcdevpims/api/respondents_client_type_transacting_office/'+year+'/'+office;
         const response = await fetch(set_url);
         const datapoints = await response.json();
         return datapoints;
@@ -680,7 +680,7 @@ const configA = {
     //     const year = $("#year").val();
     //     const report_type_id = $("#report_type_id").val();
     //     const app_url = '{{ env('APP_URL') }}';
-    //     const url = 'http://192.168.1.9/dev_pims/api/respondents_client_type_transacting_office/'+year+'/'+report_type_id;
+    //     const url = 'http://192.168.1.250/pitahcdevpims/api/respondents_client_type_transacting_office/'+year+'/'+report_type_id;
     //     const response = await fetch(url);
     //     const datapoints = await response.json();
     //     return datapoints;
@@ -782,7 +782,7 @@ const configB = {
     //     const year = segments[segments.length - 2];
     //     const office= segments[segments.length - 1];
     //     const app_url = '{{ env('APP_URL') }}';
-    //     const set_url = 'http://192.168.1.9/dev_pims/api/ratings_transacting_office/'+year+'/'+office;
+    //     const set_url = 'http://192.168.1.250/pitahcdevpims/api/ratings_transacting_office/'+year+'/'+office;
     //     const response = await fetch(set_url);
     //     const datapoints = await response.json();
     //     return datapoints;
@@ -842,7 +842,7 @@ const configB = {
     const year = segments[segments.length - 2];
     const office = segments[segments.length - 1];
     const app_url = '{{ env('APP_URL') }}';
-    const set_url = 'http://192.168.1.9/dev_pims/api/ratings_transacting_office/' + year + '/' + office;
+    const set_url = 'http://192.168.1.250/pitahcdevpims/api/ratings_transacting_office/' + year + '/' + office;
     
     const response = await fetch(set_url);
     const datapoints = await response.json();
@@ -897,7 +897,7 @@ async function fetchDataAndUpdateChartD() {
     //     const year = $("#year").val();
     //     const report_type_id = $("#report_type_id").val();
     //     const app_url = '{{ env('APP_URL') }}';
-    //     const url = 'http://192.168.1.9/dev_pims/api/ratings_transacting_office/'+year+'/'+report_type_id;
+    //     const url = 'http://192.168.1.250/pitahcdevpims/api/ratings_transacting_office/'+year+'/'+report_type_id;
     //     const response = await fetch(url);
     //     const datapoints = await response.json();
     //     return datapoints;
@@ -1081,7 +1081,7 @@ const configD = {
         const year = segments[segments.length - 2];
         const office = segments[segments.length - 1];
         const app_url = '{{ env('APP_URL') }}';
-        const set_url = 'http://192.168.1.9/dev_pims/api/average_transacting_office/'+year+'/'+office;
+        const set_url = 'http://192.168.1.250/pitahcdevpims/api/average_transacting_office/'+year+'/'+office;
         const response = await fetch(set_url);
         const datapoints = await response.json();
         return datapoints;
@@ -1116,7 +1116,7 @@ const configD = {
     //     const year = $("#year").val();
     //     const report_type_id = $("#report_type_id").val();
     //     const app_url = '{{ env('APP_URL') }}';
-    //     const url = 'http://192.168.1.9/dev_pims/api/average_transacting_office/'+year+'/'+report_type_id;
+    //     const url = 'http://192.168.1.250/pitahcdevpims/api/average_transacting_office/'+year+'/'+report_type_id;
     //     const response = await fetch(url);
     //     const datapoints = await response.json();
     //     return datapoints;
@@ -1256,7 +1256,7 @@ const configE = {
         const year = segments[segments.length - 2];
         const office = segments[segments.length - 1];
         const app_url = '{{ env('APP_URL') }}';
-        const set_url = 'http://192.168.1.9/dev_pims/api/respondents_availed_service_transacting_office/'+year+'/'+office;
+        const set_url = 'http://192.168.1.250/pitahcdevpims/api/respondents_availed_service_transacting_office/'+year+'/'+office;
         const response = await fetch(set_url);
         const datapoints = await response.json();
         return datapoints;
@@ -1285,7 +1285,7 @@ const configE = {
     //     const year = $("#year").val();
     //     const report_type_id = $("#report_type_id").val();
     //     const app_url = '{{ env('APP_URL') }}';
-    //     const url = 'http://192.168.1.9/dev_pims/api/respondents_availed_service_transacting_office/'+year+'/'+report_type_id;
+    //     const url = 'http://192.168.1.250/pitahcdevpims/api/respondents_availed_service_transacting_office/'+year+'/'+report_type_id;
     //     const response = await fetch(url);
     //     const datapoints = await response.json();
     //     return datapoints;
@@ -1390,7 +1390,7 @@ const configF = {
     const year = segments[segments.length - 2];
     const office = segments[segments.length - 1];
     const app_url = '{{ env('APP_URL') }}';
-    const set_url = 'http://192.168.1.9/dev_pims/api/respondents_client_group_transacting_office/'+year+'/'+office;
+    const set_url = 'http://192.168.1.250/pitahcdevpims/api/respondents_client_group_transacting_office/'+year+'/'+office;
     const response = await fetch(set_url);
     const datapoints = await response.json();
     return datapoints;
@@ -1419,7 +1419,7 @@ fetchData().then(datapoints => {
 //     const year = $param;
 //     const report_type_id = document.getElementById("report_type_id");
 //     const app_url = '{{ env('APP_URL') }}';
-//     const url = 'http://192.168.1.9/dev_pims/api/respondents_client_group_filter/'+year+'/'+report_type_id;
+//     const url = 'http://192.168.1.250/pitahcdevpims/api/respondents_client_group_filter/'+year+'/'+report_type_id;
 //     const response = await fetch(url);
 //     const datapoints = await response.json();
 //     return datapoints;
@@ -1514,7 +1514,7 @@ function updateChartH() {
     const year = segments[segments.length - 2];
     const office = segments[segments.length - 1];
     const app_url = '{{ env('APP_URL') }}';
-    const set_url = 'http://192.168.1.9/dev_pims/api/respondents_region_transacting_office/'+year+'/'+office;
+    const set_url = 'http://192.168.1.250/pitahcdevpims/api/respondents_region_transacting_office/'+year+'/'+office;
     const response = await fetch(set_url);
     const datapoints = await response.json();
     return datapoints;
@@ -1543,7 +1543,7 @@ fetchData().then(datapoints => {
 //     const year = $param;
 //     const report_type_id = document.getElementById("report_type_id");
 //     const app_url = '{{ env('APP_URL') }}';
-//     const url = 'http://192.168.1.9/dev_pims/api/respondents_region_filter/'+year+'/'+report_type_id;
+//     const url = 'http://192.168.1.250/pitahcdevpims/api/respondents_region_filter/'+year+'/'+report_type_id;
 //     const response = await fetch(url);
 //     const datapoints = await response.json();
 //     return datapoints;
@@ -1638,7 +1638,7 @@ function updateChartI() {
     const year = segments[segments.length - 2];
     const office = segments[segments.length - 1];
     const app_url = '{{ env('APP_URL') }}';
-    const set_url = 'http://192.168.1.9/dev_pims/api/respondents_awareness_response_transacting_office/'+year+'/'+office;
+    const set_url = 'http://192.168.1.250/pitahcdevpims/api/respondents_awareness_response_transacting_office/'+year+'/'+office;
     const response = await fetch(set_url);
     const datapoints = await response.json();
     return datapoints;
@@ -1667,7 +1667,7 @@ fetchData().then(datapoints => {
 //     const year = $param;
 //     const report_type_id = document.getElementById("report_type_id");
 //     const app_url = '{{ env('APP_URL') }}';
-//     const url = 'http://192.168.1.9/dev_pims/api/respondents_awareness_response_filter/'+year+'/'+report_type_id;
+//     const url = 'http://192.168.1.250/pitahcdevpims/api/respondents_awareness_response_filter/'+year+'/'+report_type_id;
 //     const response = await fetch(url);
 //     const datapoints = await response.json();
 //     return datapoints;
@@ -1762,7 +1762,7 @@ function updateChartJ() {
     const year = segments[segments.length - 2];
     const office = segments[segments.length - 1];
     const app_url = '{{ env('APP_URL') }}';
-    const set_url = 'http://192.168.1.9/dev_pims/api/respondents_visibility_response_transacting_office/'+year+'/'+office;
+    const set_url = 'http://192.168.1.250/pitahcdevpims/api/respondents_visibility_response_transacting_office/'+year+'/'+office;
     const response = await fetch(set_url);
     const datapoints = await response.json();
     return datapoints;
@@ -1791,7 +1791,7 @@ fetchData().then(datapoints => {
 //     const year = $param;
 //     const report_type_id = document.getElementById("report_type_id");
 //     const app_url = '{{ env('APP_URL') }}';
-//     const url = 'http://192.168.1.9/dev_pims/api/respondents_visibility_response_filter/'+year+'/'+report_type_id;
+//     const url = 'http://192.168.1.250/pitahcdevpims/api/respondents_visibility_response_filter/'+year+'/'+report_type_id;
 //     const response = await fetch(url);
 //     const datapoints = await response.json();
 //     return datapoints;
@@ -1886,7 +1886,7 @@ function updateChartK() {
     const year = segments[segments.length - 2];
     const office = segments[segments.length - 1];
     const app_url = '{{ env('APP_URL') }}';
-    const set_url = 'http://192.168.1.9/dev_pims/api/respondents_helpfulness_response_transacting_office/'+year+'/'+office;
+    const set_url = 'http://192.168.1.250/pitahcdevpims/api/respondents_helpfulness_response_transacting_office/'+year+'/'+office;
     const response = await fetch(set_url);
     const datapoints = await response.json();
     return datapoints;
@@ -1915,7 +1915,7 @@ fetchData().then(datapoints => {
 //     const year = $param;
 //     const report_type_id = document.getElementById("report_type_id");
 //     const app_url = '{{ env('APP_URL') }}';
-//     const url = 'http://192.168.1.9/dev_pims/api/respondents_helpfulness_response_filter/'+year+'/'+report_type_id;
+//     const url = 'http://192.168.1.250/pitahcdevpims/api/respondents_helpfulness_response_filter/'+year+'/'+report_type_id;
 //     const response = await fetch(url);
 //     const datapoints = await response.json();
 //     return datapoints;
