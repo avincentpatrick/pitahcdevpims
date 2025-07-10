@@ -59,6 +59,9 @@ Route::group(['middleware' => ['auth', 'verified', 'activated.account']], functi
     Route::get('/issuances/data', [IssuanceController::class, 'getIssuances'])->name('issuances.data');
     Route::post('/issuances/upload', [IssuanceController::class, 'uploadDocument'])->name('issuances.upload');
     Route::get('/api/recipients', [IssuanceController::class, 'getRecipients'])->name('api.recipients');
+    Route::get('/issuances/{id}', [IssuanceController::class, 'getDocument'])->name('issuances.get');
+    Route::post('/issuances/update/{id}', [IssuanceController::class, 'updateDocument'])->name('issuances.update');
+    Route::post('/issuances/delete/{id}', [IssuanceController::class, 'deleteDocument'])->name('issuances.delete');
 });
 
 Route::get('/email/verify', Verify::class)->middleware('auth')->name('verification.notice');
@@ -75,4 +78,3 @@ Route::post('/email/verification-notification', function (Request $request) {
 Route::get('/pages/no-admin-access', NoAdminAccess::class)->name('no-admin-access');
 Route::get('/pages/no-access', NoAccess::class)->name('no-access');
 Route::get('/pages/inactive-account', InactiveAccount::class)->name('inactive-account');
-Auth::routes();

@@ -225,6 +225,98 @@
         </div>
     </div>
 
+    <!-- Edit Document Modal -->
+    <div class="modal fade" id="editDocumentModal" tabindex="-1" role="dialog" aria-labelledby="editDocumentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editDocumentModalLabel">Edit Document</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form id="editDocumentForm">
+                                <input type="hidden" id="editDocumentId">
+                                <div class="form-group">
+                                    <label for="editModalIssuanceCategory">Issuance Category</label>
+                                    <select id="editModalIssuanceCategory" class="form-control">
+                                        <option value="1">PITAHC Order</option>
+                                        <option value="2">PITAHC Personnel Order</option>
+                                        <option value="3">PITAHC Memorandum</option>
+                                        <option value="4">PITAHC Memorandum Circular</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="editDocumentTitle">Document Title</label>
+                                    <textarea class="form-control" id="editDocumentTitle" placeholder="Enter document title" required rows="3"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="editReferenceNumber">Reference Number</label>
+                                    <input type="text" class="form-control" id="editReferenceNumber" placeholder="Enter reference number" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="editDocumentDate">Document Date</label>
+                                    <div class="input-group">
+                                        <input type="date" class="form-control" id="editDocumentDate" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="editFileUpload">File Upload (Optional)</label>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <input type="file" class="form-control-file" id="editFileUpload">
+                                        <button class="shimmer-button" type="button" id="editViewPreviewBtn" style="--bg: #17a2b8;">
+                                            <span class="spark-container">
+                                                <span class="spark"></span>
+                                            </span>
+                                            <span class="backdrop"></span>
+                                            <span class="highlight"></span>
+                                            <i class="fas fa-eye mr-2"></i>View Preview
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="editRecipients">Recipients (comma-separated emails)</label>
+                                    <div class="input-group">
+                                        <textarea class="form-control" id="editRecipients" rows="3"></textarea>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary" type="button" data-toggle="modal" data-target="#recipientModal">Browse</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-6">
+                            <div id="edit-pdf-preview-container" style="height: 500px; border: 1px solid #ddd; display: none;">
+                                <embed id="edit-pdf-preview" src="" type="application/pdf" width="100%" height="100%">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="shimmer-button" data-dismiss="modal" style="--bg: #6c757d;">
+                        <span class="spark-container">
+                            <span class="spark"></span>
+                        </span>
+                        <span class="backdrop"></span>
+                        <span class="highlight"></span>
+                        Close
+                    </button>
+                    <button type="button" class="shimmer-button" id="updateButton" style="--bg: #007bff;">
+                        <span class="spark-container">
+                            <span class="spark"></span>
+                        </span>
+                        <span class="backdrop"></span>
+                        <span class="highlight"></span>
+                        Update
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Recipient Modal -->
     <div class="modal fade" id="recipientModal" tabindex="-1" role="dialog" aria-labelledby="recipientModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -244,6 +336,47 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" id="addRecipientsBtn">Add Selected</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Document Modal -->
+    <div class="modal fade" id="deleteDocumentModal" tabindex="-1" role="dialog" aria-labelledby="deleteDocumentModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteDocumentModalLabel">Delete Document</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="deleteDocumentForm">
+                        <input type="hidden" id="deleteDocumentId">
+                        <div class="form-group">
+                            <label for="deleteReason">Reason for Deletion</label>
+                            <textarea class="form-control" id="deleteReason" rows="3" required></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="shimmer-button" data-dismiss="modal" style="--bg: #6c757d;">
+                        <span class="spark-container">
+                            <span class="spark"></span>
+                        </span>
+                        <span class="backdrop"></span>
+                        <span class="highlight"></span>
+                        Close
+                    </button>
+                    <button type="button" class="shimmer-button" id="confirmDeleteButton" style="--bg: #dc3545;">
+                        <span class="spark-container">
+                            <span class="spark"></span>
+                        </span>
+                        <span class="backdrop"></span>
+                        <span class="highlight"></span>
+                        Delete
+                    </button>
                 </div>
             </div>
         </div>
@@ -336,6 +469,10 @@
                     {data: 'document_date', name: 'document_date'},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ],
+                createdRow: function(row, data, dataIndex) {
+                    $(row).find('.edit-btn').attr('data-id', data.id);
+                    $(row).find('.delete-btn').attr('data-id', data.id);
+                },
                 pagingType: "simple",
                 drawCallback: function(settings) {
                     $('.skeleton-loader').hide();
@@ -465,6 +602,89 @@
                 var newRecipients = existingRecipients ? existingRecipients + ', ' + selectedRecipients.join(', ') : selectedRecipients.join(', ');
                 $('#recipients').val(newRecipients);
                 $('#recipientModal').modal('hide');
+            });
+
+            // Edit button click handler
+            $('#issuancesTable tbody').on('click', '.edit-btn', function() {
+                var id = $(this).data('id');
+                $.get('/issuances/' + id, function(data) {
+                    $('#editDocumentId').val(data.id);
+                    $('#editModalIssuanceCategory').val(data.document_type_id);
+                    $('#editDocumentTitle').val(data.document_title);
+                    $('#editReferenceNumber').val(data.document_reference_code);
+                    $('#editDocumentDate').val(data.document_date);
+                    var recipients = data.recipients.map(function(r) { return r.email_address; }).join(', ');
+                    $('#editRecipients').val(recipients);
+                    $('#editDocumentModal').modal('show');
+                });
+            });
+
+            // Update button click handler
+            $('#updateButton').on('click', function() {
+                var id = $('#editDocumentId').val();
+                var formData = new FormData($('#editDocumentForm')[0]);
+                formData.append('_token', '{{ csrf_token() }}');
+                
+                $.ajax({
+                    url: '/issuances/update/' + id,
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        $('#editDocumentModal').modal('hide');
+                        table.draw();
+                        toastr.success('Document updated successfully!');
+                    },
+                    error: function(response) {
+                        toastr.error('An error occurred while updating the document.');
+                    }
+                });
+            });
+
+            // Delete button click handler
+            $('#issuancesTable tbody').on('click', '.delete-btn', function() {
+                var id = $(this).data('id');
+                $('#deleteDocumentId').val(id);
+                $('#deleteDocumentModal').modal('show');
+            });
+
+            $('#confirmDeleteButton').on('click', function() {
+                var id = $('#deleteDocumentId').val();
+                var reason = $('#deleteReason').val();
+
+                if (!reason) {
+                    toastr.warning('Please provide a reason for deletion.');
+                    return;
+                }
+
+                var formData = new FormData();
+                formData.append('reason', reason);
+                formData.append('_token', '{{ csrf_token() }}');
+                $.ajax({
+                    url: "{{ url('issuances/delete') }}/" + id,
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        $('#deleteDocumentModal').modal('hide');
+                        $('#deleteDocumentForm')[0].reset();
+                        if (response.success) {
+                            table.draw();
+                            toastr.success(response.message);
+                        } else {
+                            toastr.error(response.message || 'An error occurred while deleting the document.');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        var errorMessage = 'An error occurred while deleting the document.';
+                        if (xhr.responseJSON && xhr.responseJSON.message) {
+                            errorMessage = xhr.responseJSON.message;
+                        }
+                        toastr.error(errorMessage);
+                    }
+                });
             });
         });
     </script>

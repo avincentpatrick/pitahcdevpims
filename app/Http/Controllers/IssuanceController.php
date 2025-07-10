@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Document;
+use App\Models\DocumentDeletionLog;
 use App\Models\DocumentRecipient;
 use DataTables;
 use Illuminate\Http\Request;
@@ -91,8 +92,8 @@ class IssuanceController extends Controller
                     return $row->document_date ? \Carbon\Carbon::parse($row->document_date)->format('Y-m-d') : 'N/A';
                 })
                 ->addColumn('action', function($row){
-                    $editBtn = '<button type="button" class="shimmer-button" style="--bg: #17a2b8; --radius: 5px; padding: 5px 10px;"><span class="spark-container"><span class="spark"></span></span><span class="backdrop"></span><span class="highlight"></span><i class="fas fa-edit"></i></button>';
-                    $deleteBtn = '<button type="button" class="shimmer-button" style="--bg: #dc3545; --radius: 5px; padding: 5px 10px;"><span class="spark-container"><span class="spark"></span></span><span class="backdrop"></span><span class="highlight"></span><i class="fas fa-trash"></i></button>';
+                    $editBtn = '<button type="button" class="shimmer-button edit-btn" data-id="' . $row->id . '" style="--bg: #17a2b8; --radius: 5px; padding: 5px 10px;"><span class="spark-container"><span class="spark"></span></span><span class="backdrop"></span><span class="highlight"></span><i class="fas fa-edit mr-2"></i>Edit</button>';
+                    $deleteBtn = '<button type="button" class="shimmer-button delete-btn" data-id="' . $row->id . '" style="--bg: #dc3545; --radius: 5px; padding: 5px 10px;"><span class="spark-container"><span class="spark"></span></span><span class="backdrop"></span><span class="highlight"></span><i class="fas fa-trash mr-2"></i>Delete</button>';
                     return '<div style="display: flex; gap: 5px;">' . $editBtn . $deleteBtn . '</div>';
                 })
                 ->rawColumns(['subject', 'action'])
@@ -141,5 +142,86 @@ class IssuanceController extends Controller
     {
         $recipients = DocumentRecipient::distinct()->pluck('email_address');
         return response()->json($recipients);
+    }
+
+    public function getDocument($id)
+    {
+        $document = Document::with('recipients')->find($id);
+        return response()->json($document);
+    }
+
+    public function updateDocument(Request $request, $id)
+    {
+        $request->validate([
+            'document_type_id' => 'required|integer',
+            'document_title' => 'required|string|max:255',
+            'document_reference_code' => 'required|string|max:255',
+            'document_date' => 'required|date',
+            'file' => 'nullable|file|mimes:pdf',
+            'recipients' => 'nullable|string',
+        ]);
+
+        $document = Document::find($id);
+
+        if ($request->hasFile('file')) {
+            // Delete old file
+            if ($document->file_path) {
+                Storage::disk('public')->delete($document->file_path);
+            }
+            $filePath = $request->file('file')->store('issuances', 'public');
+            $document->file_path = $filePath;
+        }
+
+        $document->document_type_id = $request->input('document_type_id');
+        $document->document_title = $request->input('document_title');
+        $document->document_reference_code = $request->input('document_reference_code');
+        $document->document_date = $request->input('document_date');
+        $document->updated_by = Auth::id();
+        $document->save();
+
+        // Sync recipients
+        $document->recipients()->delete();
+        if ($request->filled('recipients')) {
+            $emails = explode(',', $request->input('recipients'));
+            foreach ($emails as $email) {
+                $recipient = new DocumentRecipient();
+                $recipient->document_id = $document->id;
+                $recipient->email_address = trim($email);
+                $recipient->created_by = Auth::id();
+                $recipient->save();
+            }
+        }
+
+        return response()->json(['success' => true]);
+    }
+
+    public function deleteDocument(Request $request, $id)
+    {
+        $request->validate([
+            'reason' => 'required|string|max:255',
+        ]);
+
+        try {
+            DocumentDeletionLog::create([
+                'document_id' => $id,
+                'user_id' => Auth::id(),
+                'reason' => $request->input('reason'),
+            ]);
+
+            $document = Document::find($id);
+            if ($document) {
+                if ($document->file_path) {
+                    Storage::disk('public')->delete($document->file_path);
+                }
+                $document->recipients()->delete();
+                $document->delete();
+            } else {
+                return response()->json(['success' => false, 'message' => 'Document not found.'], 404);
+            }
+
+            return response()->json(['success' => true, 'message' => 'Document deleted successfully!']);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'An unexpected error occurred: ' . $e->getMessage()], 500);
+        }
     }
 }
