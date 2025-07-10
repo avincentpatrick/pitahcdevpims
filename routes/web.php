@@ -58,6 +58,7 @@ Route::group(['middleware' => ['auth', 'verified', 'activated.account']], functi
     Route::get('/issuances', [IssuanceController::class, 'index'])->name('issuances.index');
     Route::get('/issuances/data', [IssuanceController::class, 'getIssuances'])->name('issuances.data');
     Route::post('/issuances/upload', [IssuanceController::class, 'uploadDocument'])->name('issuances.upload');
+    Route::get('/api/recipients', [IssuanceController::class, 'getRecipients'])->name('api.recipients');
 });
 
 Route::get('/email/verify', Verify::class)->middleware('auth')->name('verification.notice');

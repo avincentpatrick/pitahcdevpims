@@ -46,7 +46,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="table_search">Search (by Title)</label>
-                                <input type="search" id="table_search" class="form-control" placeholder="Enter title...">
+                                <textarea id="table_search" class="form-control" placeholder="Enter title..."></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="issuance_no_search">Issuance No.</label>
@@ -54,28 +54,41 @@
                             </div>
                             <div class="form-group">
                                 <label>Date Range</label>
-                                <div class="input-group date" id="start_date_picker" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input" data-target="#start_date_picker" id="start_date" placeholder="From"/>
-                                    <div class="input-group-append" data-target="#start_date_picker" data-toggle="datetimepicker">
-                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                    </div>
+                                <div class="input-group">
+                                    <input type="date" class="form-control" id="start_date" placeholder="From">
                                 </div>
-                                <div class="input-group date mt-2" id="end_date_picker" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input" data-target="#end_date_picker" id="end_date" placeholder="To"/>
-                                    <div class="input-group-append" data-target="#end_date_picker" data-toggle="datetimepicker">
-                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                    </div>
+                                <div class="input-group mt-2">
+                                    <input type="date" class="form-control" id="end_date" placeholder="To">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <button type="button" id="search_button" class="btn btn-primary">Search</button>
-                                <button type="button" id="clear_button" class="btn btn-danger">Clear</button>
+                            <div class="form-group d-flex justify-content-end">
+                                <button type="button" id="clear_button" class="shimmer-button" style="--bg: #dc3545;">
+                                    <span class="spark-container">
+                                        <span class="spark"></span>
+                                    </span>
+                                    <span class="backdrop"></span>
+                                    <span class="highlight"></span>
+                                    <i class="fas fa-times mr-2"></i>Clear
+                                </button>
+                                <button type="button" id="search_button" class="shimmer-button" style="--bg: #007bff;">
+                                    <span class="spark-container">
+                                        <span class="spark"></span>
+                                    </span>
+                                    <span class="backdrop"></span>
+                                    <span class="highlight"></span>
+                                    <i class="fas fa-search mr-2"></i>Search
+                                </button>
                             </div>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-body">
-                            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#uploadDocumentModal">
+                            <button type="button" class="shimmer-button btn-block" data-toggle="modal" data-target="#uploadDocumentModal" style="--bg: #007bff;">
+                                <span class="spark-container">
+                                    <span class="spark"></span>
+                                </span>
+                                <span class="backdrop"></span>
+                                <span class="highlight"></span>
                                 <i class="fas fa-upload mr-2"></i>Upload Document
                             </button>
                         </div>
@@ -85,7 +98,7 @@
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h3 class="card-title">List of Issuances</h3>
-                            <div class="form-group mb-0">
+                            <div class="form-group mb-0 ml-auto">
                                 <label for="table_length" class="mr-2">Show Entries</label>
                                 <select id="table_length" class="form-control form-control-sm" style="width: auto; display: inline-block;">
                                     <option value="10">10</option>
@@ -154,21 +167,32 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="documentDate">Document Date</label>
-                                    <input type="date" class="form-control" id="documentDate" required>
+                                    <div class="input-group">
+                                        <input type="date" class="form-control" id="documentDate" required>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="fileUpload">File Upload</label>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <input type="file" class="form-control-file" id="fileUpload" required>
-                                        <button class="btn btn-info" type="button" id="viewPreviewBtn">
+                                        <button class="shimmer-button" type="button" id="viewPreviewBtn" style="--bg: #17a2b8;">
+                                            <span class="spark-container">
+                                                <span class="spark"></span>
+                                            </span>
+                                            <span class="backdrop"></span>
+                                            <span class="highlight"></span>
                                             <i class="fas fa-eye mr-2"></i>View Preview
                                         </button>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="recipients">Recipients (comma-separated emails)</label>
-                                    <textarea class="form-control" id="recipients" rows="3"></textarea>
-                                    <div id="recipient-preview" class="mt-2"></div>
+                                    <div class="input-group">
+                                        <textarea class="form-control" id="recipients" rows="3"></textarea>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary" type="button" data-toggle="modal" data-target="#recipientModal">Browse</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -180,8 +204,46 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="shimmer-button" data-dismiss="modal" style="--bg: #6c757d;">
+                        <span class="spark-container">
+                            <span class="spark"></span>
+                        </span>
+                        <span class="backdrop"></span>
+                        <span class="highlight"></span>
+                        Close
+                    </button>
+                    <button type="button" class="shimmer-button" id="uploadButton" style="--bg: #007bff;">
+                        <span class="spark-container">
+                            <span class="spark"></span>
+                        </span>
+                        <span class="backdrop"></span>
+                        <span class="highlight"></span>
+                        Upload
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recipient Modal -->
+    <div class="modal fade" id="recipientModal" tabindex="-1" role="dialog" aria-labelledby="recipientModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="recipientModalLabel">Select Recipients</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="recipientSearch" class="form-control mb-2" placeholder="Search recipients...">
+                    <div id="recipientList" style="height: 300px; overflow-y: auto;">
+                        <!-- Recipient list will be populated here -->
+                    </div>
+                </div>
+                <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="uploadButton">Upload</button>
+                    <button type="button" class="btn btn-primary" id="addRecipientsBtn">Add Selected</button>
                 </div>
             </div>
         </div>
@@ -204,6 +266,18 @@
             margin: 0 5px;
             border-radius: 20px !important;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        #issuancesTable.table-striped tbody tr:nth-of-type(odd) {
+            background-color: #f8f9fa;
+        }
+        #issuancesTable tbody tr {
+            border-bottom: 1px solid #dee2e6;
+        }
+        #issuancesTable tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+        #issuancesTable {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         .skeleton-loader .skeleton-line {
             width: 100%;
@@ -351,26 +425,46 @@
                 $('#pdf-preview-container').hide();
             });
 
-            $('#recipients').on('input', function() {
-                const text = $(this).val();
-                const emailRegex = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi;
-                let html = text.replace(emailRegex, '<a href="mailto:$1" style="text-decoration: underline;">$1</a>');
-                $('#recipient-preview').html(html);
+            // Recipient modal logic
+            var allRecipients = [];
+
+            $('#recipientModal').on('show.bs.modal', function() {
+                $.ajax({
+                    url: "{{ route('api.recipients') }}",
+                    type: 'GET',
+                    success: function(data) {
+                        allRecipients = data;
+                        renderRecipientList(allRecipients);
+                    }
+                });
             });
 
-            $('#start_date_picker').datetimepicker({
-                format: 'YYYY-MM-DD'
-            });
-            $('#end_date_picker').datetimepicker({
-                format: 'YYYY-MM-DD',
-                useCurrent: false
+            $('#recipientSearch').on('keyup', function() {
+                var searchTerm = $(this).val().toLowerCase();
+                var filteredRecipients = allRecipients.filter(function(recipient) {
+                    return recipient.toLowerCase().includes(searchTerm);
+                });
+                renderRecipientList(filteredRecipients);
             });
 
-            $("#start_date_picker").on("change.datetimepicker", function (e) {
-                $('#end_date_picker').datetimepicker('minDate', e.date);
-            });
-            $("#end_date_picker").on("change.datetimepicker", function (e) {
-                $('#start_date_picker').datetimepicker('maxDate', e.date);
+            function renderRecipientList(recipients) {
+                var recipientList = $('#recipientList');
+                recipientList.empty();
+                recipients.forEach(function(recipient) {
+                    recipientList.append('<div class="form-check"><input class="form-check-input" type="checkbox" value="' + recipient + '" id="recipient-' + recipient + '"><label class="form-check-label" for="recipient-' + recipient + '">' + recipient + '</label></div>');
+                });
+            }
+
+            $('#addRecipientsBtn').on('click', function() {
+                var selectedRecipients = [];
+                $('#recipientList input:checked').each(function() {
+                    selectedRecipients.push($(this).val());
+                });
+
+                var existingRecipients = $('#recipients').val();
+                var newRecipients = existingRecipients ? existingRecipients + ', ' + selectedRecipients.join(', ') : selectedRecipients.join(', ');
+                $('#recipients').val(newRecipients);
+                $('#recipientModal').modal('hide');
             });
         });
     </script>

@@ -91,8 +91,9 @@ class IssuanceController extends Controller
                     return $row->document_date ? \Carbon\Carbon::parse($row->document_date)->format('Y-m-d') : 'N/A';
                 })
                 ->addColumn('action', function($row){
-                    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-info btn-sm"><i class="fas fa-edit"></i></a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>';
-                    return $actionBtn;
+                    $editBtn = '<button type="button" class="shimmer-button" style="--bg: #17a2b8; --radius: 5px; padding: 5px 10px;"><span class="spark-container"><span class="spark"></span></span><span class="backdrop"></span><span class="highlight"></span><i class="fas fa-edit"></i></button>';
+                    $deleteBtn = '<button type="button" class="shimmer-button" style="--bg: #dc3545; --radius: 5px; padding: 5px 10px;"><span class="spark-container"><span class="spark"></span></span><span class="backdrop"></span><span class="highlight"></span><i class="fas fa-trash"></i></button>';
+                    return '<div style="display: flex; gap: 5px;">' . $editBtn . $deleteBtn . '</div>';
                 })
                 ->rawColumns(['subject', 'action'])
                 ->make(true);
@@ -136,4 +137,9 @@ class IssuanceController extends Controller
         return response()->json(['success' => true]);
     }
 
+    public function getRecipients()
+    {
+        $recipients = DocumentRecipient::distinct()->pluck('email_address');
+        return response()->json($recipients);
+    }
 }

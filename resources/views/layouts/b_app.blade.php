@@ -19,10 +19,6 @@
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
-    <!-- daterange picker -->
-    <link rel="stylesheet" href="{{ asset('/plugins/daterangepicker/daterangepicker.css') }}">
-    <!-- Tempusdominus Bbootstrap 4 -->
-    <link rel="stylesheet" href="{{ asset('/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css')}}">
     <!-- JQuery -->
@@ -35,6 +31,7 @@
     
     @yield('third_party_stylesheets')
 
+    <link rel="stylesheet" href="{{ asset('css/shimmer-button.css') }}">
     @stack('page_css')
     <livewire:styles />
 </head>
@@ -77,10 +74,7 @@
 <!-- InputMask -->
 <script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
 <script src="{{ asset('plugins/inputmask/min/jquery.inputmask.bundle.min.js') }}"></script>
-<!-- date-range-picker -->
-<script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="{{ asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.js') }}"></script>
+<script src="{{ asset('js/flatpickr.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.min.js')}}"></script>
 

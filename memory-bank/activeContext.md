@@ -2,15 +2,16 @@
 
 ## Current Focus
 
-The primary focus is on fixing a critical bug in the "Issuances" module where document uploads were failing. The investigation revealed that the `documents` table was missing a `document_date` column, and the controller was attempting to save to a non-existent field.
+The primary focus is on enhancing the user interface and experience of the "Issuances" module. This includes replacing the existing date picker with native browser controls and implementing a more robust solution for selecting document recipients.
 
 ## Recent Changes
 
-- **Database Schema Update:** A new migration was created and executed to add the `document_date` column to the `documents` table.
-- **Controller Logic Correction:** The `IssuanceController` was updated to save the `document_date` from the form into the new corresponding database column. The incorrect logic that attempted to save this value to the `created_at` timestamp has been removed.
-- **Abandoned Feature Removal:** All code and documentation related to the Tesseract OCR functionality, which was an abandoned concept, has been removed from the controller and the memory bank to simplify the codebase and prevent future confusion.
+- **Date Picker Refactoring:** The Flatpickr implementation in the Issuances module has been completely replaced with native HTML5 `input type="date"` elements. This simplifies the frontend by removing the Flatpickr library dependency and the associated custom JavaScript and CSS.
+- **UI Layout Adjustments:**
+    - The "Search (by Title)" input field in the filter options has been converted to a `textarea` for better usability with longer search queries.
+    - The "Show Entries" dropdown has been repositioned to appear next to the "List of Issuances" title for a more intuitive layout.
 
 ## Next Steps
 
-- Continue with the UI/UX enhancements for the Issuances module as outlined in `issuances-module-enhancements.md`.
-- Address the known technical debt issues listed in `progress.md`.
+- **Implement Multiselect for Recipients:** The next major enhancement is to replace the `textarea` for recipients in the upload modal with a dynamic, searchable multiselect component (e.g., using Select2). This will be populated with data from the `document_recipients` table via a new API endpoint.
+- **Address Technical Debt:** Continue to address the known technical debt issues listed in `progress.md`, such as replacing abandoned packages.

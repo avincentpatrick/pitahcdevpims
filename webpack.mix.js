@@ -15,8 +15,12 @@ mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .styles([
         'node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css',
-        'node_modules/datatables.net-responsive-bs4/css/responsive.bootstrap4.css'
-    ], 'public/css/datatables.css').serve({
+        'node_modules/datatables.net-responsive-bs4/css/responsive.bootstrap4.css',
+        'node_modules/flatpickr/dist/flatpickr.min.css'
+    ], 'public/css/datatables.css')
+    .scripts([
+        'node_modules/flatpickr/dist/flatpickr.min.js'
+    ], 'public/js/flatpickr.js').serve({
         host: '127.0.0.1',
         port: '8002',
       });
