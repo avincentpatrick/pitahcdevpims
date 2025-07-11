@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->integer('local')->nullable();
             $table->string('password');
             $table->integer('position_id')->nullable();
+            $table->string('employee_id_no')->nullable();
             $table->integer('office_id')->nullable();
             $table->integer('division_id')->nullable();
             $table->integer('userlevel_id')->nullable();
