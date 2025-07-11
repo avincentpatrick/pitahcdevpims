@@ -18,3 +18,4 @@
 - **Livewire:** For building dynamic interfaces.
 - **Laravel Mix:** For asset compilation.
 - **Yajra DataTables:** The `yajra/laravel-datatables-buttons` package is used for server-side processing of DataTables.
+- **Fruitcake CORS:** The `fruitcake/laravel-cors` package is a required dependency for handling Cross-Origin Resource Sharing and should not be removed.

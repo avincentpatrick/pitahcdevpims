@@ -14,4 +14,14 @@ class DocumentDeletionLog extends Model
         'user_id',
         'reason',
     ];
+
+    public function document()
+    {
+        return $this->belongsTo(Document::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

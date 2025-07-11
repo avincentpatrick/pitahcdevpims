@@ -608,6 +608,7 @@
             $('#issuancesTable tbody').on('click', '.edit-btn', function() {
                 var id = $(this).data('id');
                 $.get('/issuances/' + id, function(data) {
+                    alert(JSON.stringify(data));
                     $('#editDocumentId').val(data.id);
                     $('#editModalIssuanceCategory').val(data.document_type_id);
                     $('#editDocumentTitle').val(data.document_title);
